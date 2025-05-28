@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - VA Auto Detailing</title>
+    <link rel="icon" type="image/x-icon" href="/Users/arthurlekht/Desktop/Computer Science 1/unit 6/Screen Shot 2025-03-28 at 5.20.36 PM.png">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --black: #000000;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--black);
+            color: white;
+        }
+
+        .header {
+            background-color: var(--black);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .nav {
+            background-color: var(--gold);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .nav a {
+            color: var(--black);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        .section {
+            padding: 40px;
+            margin: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--gold);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--gold);
+            cursor: zoom-in;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            text-align: center;
+        }
+
+        .category-title {
+            text-align: center;
+            margin: 40px 0 20px;
+            color: var(--gold);
+        }
+
+        /* Lightbox styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .lightbox img {
+            max-width: 95%;
+            max-height: 95vh;
+            margin: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 3px solid var(--gold);
+            object-fit: contain;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: white;
+            font-size: 1.4em;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-top: 2px solid var(--gold);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>VA Auto Detailing</h1>
+        <p>Premium Car Care Services</p>
+    </div>
+
+    <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="gallery.html">Our Work</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="section">
+        <h2>Our Work</h2>
+        
+        <h3 class="category-title">Interior Detailing</h3>
+        <div class="gallery">
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="IMG_1208.jpeg" alt="Interior Before 1">
+                <div class="gallery-caption">Before</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="IMG_1215.jpeg" alt="Interior After 1">
+                <div class="gallery-caption">After</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="IMG_1236.JPG" alt="Interior Before 2">
+                <div class="gallery-caption">Before</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="IMG_1238.JPG" alt="Interior After 2">
+                <div class="gallery-caption">After</div>
+            </div>
+        </div>
+
+        <h3 class="category-title">Exterior Detailing</h3>
+        <div class="gallery">
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="IMG_1221.JPG" alt="Exterior Before 1">
+                <div class="gallery-caption">Before</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="IMG_1230.JPG" alt="Exterior After 1">
+                <div class="gallery-caption">After</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="IMG_1459.JPG" alt="Exterior Before 2">
+                <div class="gallery-caption">Before</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="IMG_1308.JPG" alt="Exterior After 2">
+                <div class="gallery-caption">After</div>
+            </div>
+        </div>
+
+        
+    </div>
+
+    <!-- Lightbox container -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <img src="" alt="">
+        <div class="lightbox-caption"></div>
+    </div>
+
+    <script>
+        function openLightbox(element) {
+            const lightbox = document.getElementById('lightbox');
+            const img = element.querySelector('img');
+            const caption = element.querySelector('.gallery-caption');
+            
+            lightbox.querySelector('img').src = img.src;
+            lightbox.querySelector('.lightbox-caption').textContent = caption.textContent;
+            lightbox.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when lightbox is open
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html> 

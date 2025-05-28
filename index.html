@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VA Auto Detailing</title>
+    <link rel="icon" type="image/x-icon" href="/Users/arthurlekht/Desktop/Computer Science 1/unit 6/Screen Shot 2025-03-28 at 5.20.36 PM.png">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --black: #000000;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--black);
+            color: white;
+        }
+
+        .header {
+            background-color: var(--black);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .nav {
+            background-color: var(--gold);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .nav a {
+            color: var(--black);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        .section {
+            padding: 40px;
+            margin: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--gold);
+        }
+
+        .hero {
+            height: 60vh;
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('hero-image.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .hero h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: var(--gold);
+            color: var(--black);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px 20px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--gold);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background-color: var(--gold);
+            color: var(--black);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .feature-card:hover i {
+            color: var(--black);
+        }
+
+        .feature-card i {
+            font-size: 2em;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        /* Login Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: var(--black);
+            margin: 15% auto;
+            padding: 30px;
+            width: 80%;
+            max-width: 500px;
+            border: 3px solid var(--gold);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            color: var(--gold);
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-modal:hover {
+            color: #b38f2e;
+        }
+
+        .login-form {
+            margin-top: 20px;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid var(--gold);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+
+        .login-btn {
+            background-color: var(--gold);
+            color: var(--black);
+            padding: 12px 30px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background-color: #b38f2e;
+        }
+
+        .discount-badge {
+            background-color: var(--gold);
+            color: var(--black);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2>Welcome to VA Auto Detailing!</h2>
+            <div class="discount-badge">Get 10% Off Your First Detail</div>
+            <p>Log in or create an account to claim your discount</p>
+            <div class="login-form">
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <button class="login-btn">Log In</button>
+                <p style="margin-top: 15px;">Don't have an account? <a href="#" style="color: var(--gold);">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="header">
+        <h1>VA Auto Detailing</h1>
+        <p>Premium Car Care Services</p>
+    </div>
+
+    <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="gallery.html">Our Work</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h2>Professional Auto Detailing Services</h2>
+            <p>Experience the difference with our premium detailing services. We treat every vehicle with the care it deserves.</p>
+            <a href="services.html" class="cta-button">View Our Services</a>
+        </div>
+    </div>
+
+    <div class="features">
+        <div class="feature-card">
+            <i class="fas fa-car"></i>
+            <h3>Expert Service</h3>
+            <p>Professional detailing for all vehicle types</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-star"></i>
+            <h3>Quality Guaranteed</h3>
+            <p>Premium products and attention to detail</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-clock"></i>
+            <h3>Convenient Hours</h3>
+            <p>Flexible scheduling to fit your needs</p>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Show modal when page loads
+        window.onload = function() {
+            setTimeout(function() {
+                document.getElementById('loginModal').style.display = 'block';
+            }, 1000); // Show after 1 second
+        }
+
+        // Close modal function
+        function closeModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('loginModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html> 

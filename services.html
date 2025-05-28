@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - VA Auto Detailing</title>
+    <link rel="icon" type="image/x-icon" href="/Users/arthurlekht/Desktop/Computer Science 1/unit 6/Screen Shot 2025-03-28 at 5.20.36 PM.png">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --black: #000000;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--black);
+            color: white;
+        }
+
+        .header {
+            background-color: var(--black);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .nav {
+            background-color: var(--gold);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .nav a {
+            color: var(--black);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        .section {
+            padding: 40px;
+            margin: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--gold);
+        }
+
+        .pricing-table {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .price-card {
+            background-color: var(--black);
+            border: 2px solid var(--gold);
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+
+        .price-card:hover {
+            transform: translateY(-10px);
+            background-color: var(--gold);
+            color: var(--black);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .price-card:hover h3,
+        .price-card:hover h4,
+        .price-card:hover p {
+            color: var(--black);
+        }
+
+        .price-card:hover ul {
+            color: var(--black);
+        }
+
+        .booking-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .booking-form input, .booking-form select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .submit-button {
+            background-color: var(--gold);
+            color: var(--black);
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        .calendly-inline-widget {
+            min-width: 320px;
+            height: 700px;
+            margin: 20px 0;
+            border: 2px solid var(--gold);
+            border-radius: 5px;
+        }
+
+        #booking-section {
+            scroll-margin-top: 40px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+    <!-- Calendly widget script -->
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+</head>
+<body>
+    <div class="header">
+        <h1>VA Auto Detailing</h1>
+        <p>Premium Car Care Services</p>
+    </div>
+
+    <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="gallery.html">Our Work</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="section">
+        <h2>Our Packages</h2>
+        <div class="pricing-table">
+            <!-- Interior Detail Row -->
+            <a href="#booking-section" class="price-card" onclick="selectPackage('coupe-interior')">
+                <h3>Coupe/Sedan</h3>
+                <h4>Interior Detail</h4>
+                <p>$149</p>
+                <ul>
+                    <li>Deep Interior Cleaning</li>
+                    <li>Dashboard & Console Detail</li>
+                    <li>Trunk Cleaning</li>
+                </ul>
+            </a>
+            <a href="#booking-section" class="price-card" onclick="selectPackage('small-interior')">
+                <h3>Small SUV</h3>
+                <h4>Interior Detail</h4>
+                <p>$199</p>
+                <ul>
+                    <li>Deep Interior Cleaning</li>
+                    <li>Dashboard & Console Detail</li>
+                    <li>Cargo Area Cleaning</li>
+                </ul>
+            </a>
+            <a href="#booking-section" class="price-card" onclick="selectPackage('mid-interior')">
+                <h3>Mid/Full SUV</h3>
+                <h4>Interior Detail</h4>
+                <p>$249</p>
+                <ul>
+                    <li>Deep Interior Cleaning</li>
+                    <li>Dashboard & Console Detail</li>
+                    <li>Third Row Cleaning</li>
+                </ul>
+            </a>
+            <a href="#booking-section" class="price-card" onclick="selectPackage('xl-interior')">
+                <h3>XL SUV</h3>
+                <h4>Interior Detail</h4>
+                <p>$299</p>
+                <ul>
+                    <li>Deep Interior Cleaning</li>
+                    <li>Dashboard & Console Detail</li>
+                    <li>Extended Cargo Area</li>
+                </ul>
+            </a>
+
+            <!-- Exterior Detail Row -->
+            <a href="#booking-section" class="price-card" onclick="selectPackage('coupe-exterior')">
+                <h3>Coupe/Sedan</h3>
+                <h4>Exterior Detail</h4>
+                <p>$149</p>
+                <ul>
+                    
+                    <li>Wax Application</li>
+                    <li>Wheel & Tire Detail</li>
+                    <li>Window Cleaning</li>
+                </ul>
+            </a>
+            <a href="#booking-section" class="price-card" onclick="selectPackage('small-exterior')">
+                <h3>Small SUV</h3>
+                <h4>Exterior Detail</h4>
+                <p>$199</p>
+                <ul>
+                    
+                    <li>Wax Application</li>
+                    <li>Wheel & Tire Detail</li>
+                    <li>Window Cleaning</li>
+                </ul>
+            </a>
+            <a href="#booking-section" class="price-card" onclick="selectPackage('mid-exterior')">
+                <h3>Mid/Full SUV</h3>
+                <h4>Exterior Detail</h4>
+                <p>$249</p>
+                <ul>
+                    
+                    <li>Wax Application</li>
+                    <li>Wheel & Tire Detail</li>
+                    <li>Window Cleaning</li>
+                </ul>
+            </a>
+            <a href="#booking-section" class="price-card" onclick="selectPackage('xl-exterior')">
+                <h3>XL SUV</h3>
+                <h4>Exterior Detail</h4>
+                <p>$299</p>
+                <ul>
+                    
+                    <li>Wax Application</li>
+                    <li>Wheel & Tire Detail</li>
+                    <li>Window Cleaning</li>
+                </ul>
+            </a>
+
+            <!-- Full Detail Row -->
+            <a href="#booking-section" class="price-card" onclick="selectPackage('coupe-full')">
+                <h3>Coupe/Sedan</h3>
+                <h4>Full Detail</h4>
+                <p>$249</p>
+                <ul>
+                    <li>Everything in Interior & Exterior</li>
+                </ul>
+            </a>
+            <a href="#booking-section" class="price-card" onclick="selectPackage('small-full')">
+                <h3>Small SUV</h3>
+                <h4>Full Detail</h4>
+                <p>$349</p>
+                <ul>
+                    <li>Everything in Interior & Exterior</li>
+                </ul>
+            </a>
+            <a href="#booking-section" class="price-card" onclick="selectPackage('mid-full')">
+                <h3>Mid/Full SUV</h3>
+                <h4>Full Detail</h4>
+                <p>$449</p>
+                <ul>
+                    <li>Everything in Interior & Exterior</li>
+                </ul>
+            </a>
+            <a href="#booking-section" class="price-card" onclick="selectPackage('xl-full')">
+                <h3>XL SUV</h3>
+                <h4>Full Detail</h4>
+                <p>$549</p>
+                <ul>
+                    <li>Everything in Interior & Exterior</li>
+                </ul>
+            </a>
+        </div>
+    </div>
+
+    <div id="booking-section" class="section">
+        <h2>Book an Appointment</h2>
+        <div class="booking-form">
+            <form action="/submit-booking" method="POST">
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email" required>
+                <input type="tel" placeholder="Phone Number" required>
+                <input type="text" placeholder="Vehicle Make/Model" required>
+                <select id="package-select" required>
+                    <option value="">Select Package</option>
+                    <!-- Coupe/Sedan Options -->
+                    <option value="coupe-interior">Coupe/Sedan - Interior Detail</option>
+                    <option value="coupe-exterior">Coupe/Sedan - Exterior Detail</option>
+                    <option value="coupe-full">Coupe/Sedan - Full Detail</option>
+                    <!-- Small SUV Options -->
+                    <option value="small-interior">Small SUV - Interior Detail</option>
+                    <option value="small-exterior">Small SUV - Exterior Detail</option>
+                    <option value="small-full">Small SUV - Full Detail</option>
+                    <!-- Mid/Full SUV Options -->
+                    <option value="mid-interior">Mid/Full SUV - Interior Detail</option>
+                    <option value="mid-exterior">Mid/Full SUV - Exterior Detail</option>
+                    <option value="mid-full">Mid/Full SUV - Full Detail</option>
+                    <!-- XL SUV Options -->
+                    <option value="xl-interior">XL SUV - Interior Detail</option>
+                    <option value="xl-exterior">XL SUV - Exterior Detail</option>
+                    <option value="xl-full">XL SUV - Full Detail</option>
+                </select>
+                <input type="date" required>
+                <select required>
+                    <option value="">Select Time Slot</option>
+                    <option value="10-12">10:00 AM - 12:00 PM</option>
+                    <option value="12-2">12:00 PM - 2:00 PM</option>
+                    <option value="2-4">2:00 PM - 4:00 PM</option>
+                    <option value="4-6">4:00 PM - 6:00 PM</option>
+                </select>
+                <button type="submit" class="submit-button">Book Now</button>
+            </form>
+        </div>
+        
+        <!-- Calendly inline widget -->
+        <div class="calendly-inline-widget" data-url="https://calendly.com/arthurlekht44"></div>
+    </div>
+
+    <script>
+        function selectPackage(packageId) {
+            document.getElementById('package-select').value = packageId;
+            // Add a highlight effect to the booking form
+            const bookingSection = document.getElementById('booking-section');
+            bookingSection.style.transition = 'background-color 0.5s ease';
+            bookingSection.style.backgroundColor = 'rgba(212, 175, 55, 0.1)';
+            setTimeout(() => {
+                bookingSection.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            }, 1000);
+        }
+    </script>
+</body>
+</html> 
