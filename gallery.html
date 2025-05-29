@@ -29,6 +29,7 @@
             background-color: var(--gold);
             padding: 15px;
             text-align: center;
+            position: relative;
         }
 
         .nav a {
@@ -36,6 +37,23 @@
             text-decoration: none;
             margin: 0 15px;
             font-weight: bold;
+        }
+
+        .auth-button {
+            background-color: var(--gold);
+            color: var(--black) !important;
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: none;
+            transition: all 0.3s ease;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .auth-button:hover {
+            opacity: 0.9;
         }
 
         .section {
@@ -124,6 +142,67 @@
             background-color: rgba(0, 0, 0, 0.8);
             border-top: 2px solid var(--gold);
         }
+
+        /* Add popup styles */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: var(--black);
+            padding: 30px;
+            border: 3px solid var(--gold);
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .popup-content h2 {
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .popup-content input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid var(--gold);
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .popup-content button {
+            background-color: var(--gold);
+            color: var(--black);
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .popup-content button:hover {
+            opacity: 0.9;
+        }
+
+        .close-popup {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: var(--gold);
+            cursor: pointer;
+            font-size: 24px;
+        }
     </style>
 </head>
 <body>
@@ -137,6 +216,7 @@
         <a href="services.html">Services</a>
         <a href="gallery.html">Our Work</a>
         <a href="contact.html">Contact</a>
+        <a href="auth.html" class="auth-button">Sign In / Sign Up</a>
     </div>
 
     <div class="section">
@@ -191,7 +271,45 @@
         <div class="lightbox-caption"></div>
     </div>
 
+    <!-- Add popup HTML -->
+    <div id="emailPopup" class="popup-overlay">
+        <div class="popup-content">
+            <span class="close-popup" onclick="closePopup()">&times;</span>
+            <h2>Stay Updated!</h2>
+            <p>Subscribe to our newsletter for exclusive offers and updates.</p>
+            <form id="emailForm" onsubmit="handleSubmit(event)">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+
     <script>
+        // Add popup functionality
+        function showPopup() {
+            if (!localStorage.getItem('popupShown')) {
+                document.getElementById('emailPopup').style.display = 'flex';
+            }
+        }
+
+        function closePopup() {
+            document.getElementById('emailPopup').style.display = 'none';
+            localStorage.setItem('popupShown', 'true');
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            // Here you would typically send the email to your server
+            alert('Thank you for subscribing!');
+            closePopup();
+        }
+
+        // Show popup when page loads
+        window.onload = function() {
+            showPopup();
+        };
+
         function openLightbox(element) {
             const lightbox = document.getElementById('lightbox');
             const img = element.querySelector('img');

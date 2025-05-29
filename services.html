@@ -29,6 +29,7 @@
             background-color: var(--gold);
             padding: 15px;
             text-align: center;
+            position: relative;
         }
 
         .nav a {
@@ -36,6 +37,23 @@
             text-decoration: none;
             margin: 0 15px;
             font-weight: bold;
+        }
+
+        .auth-button {
+            background-color: var(--gold);
+            color: var(--black) !important;
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: none;
+            transition: all 0.3s ease;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .auth-button:hover {
+            opacity: 0.9;
         }
 
         .section {
@@ -133,6 +151,7 @@
         <a href="services.html">Services</a>
         <a href="gallery.html">Our Work</a>
         <a href="contact.html">Contact</a>
+        <a href="auth.html" class="auth-button">Sign In / Sign Up</a>
     </div>
 
     <div class="section">
@@ -264,50 +283,12 @@
 
     <div id="booking-section" class="section">
         <h2>Book an Appointment</h2>
-        <div class="booking-form">
-            <form action="/submit-booking" method="POST">
-                <input type="text" placeholder="Full Name" required>
-                <input type="email" placeholder="Email" required>
-                <input type="tel" placeholder="Phone Number" required>
-                <input type="text" placeholder="Vehicle Make/Model" required>
-                <select id="package-select" required>
-                    <option value="">Select Package</option>
-                    <!-- Coupe/Sedan Options -->
-                    <option value="coupe-interior">Coupe/Sedan - Interior Detail</option>
-                    <option value="coupe-exterior">Coupe/Sedan - Exterior Detail</option>
-                    <option value="coupe-full">Coupe/Sedan - Full Detail</option>
-                    <!-- Small SUV Options -->
-                    <option value="small-interior">Small SUV - Interior Detail</option>
-                    <option value="small-exterior">Small SUV - Exterior Detail</option>
-                    <option value="small-full">Small SUV - Full Detail</option>
-                    <!-- Mid/Full SUV Options -->
-                    <option value="mid-interior">Mid/Full SUV - Interior Detail</option>
-                    <option value="mid-exterior">Mid/Full SUV - Exterior Detail</option>
-                    <option value="mid-full">Mid/Full SUV - Full Detail</option>
-                    <!-- XL SUV Options -->
-                    <option value="xl-interior">XL SUV - Interior Detail</option>
-                    <option value="xl-exterior">XL SUV - Exterior Detail</option>
-                    <option value="xl-full">XL SUV - Full Detail</option>
-                </select>
-                <input type="date" required>
-                <select required>
-                    <option value="">Select Time Slot</option>
-                    <option value="10-12">10:00 AM - 12:00 PM</option>
-                    <option value="12-2">12:00 PM - 2:00 PM</option>
-                    <option value="2-4">2:00 PM - 4:00 PM</option>
-                    <option value="4-6">4:00 PM - 6:00 PM</option>
-                </select>
-                <button type="submit" class="submit-button">Book Now</button>
-            </form>
-        </div>
-        
         <!-- Calendly inline widget -->
         <div class="calendly-inline-widget" data-url="https://calendly.com/arthurlekht44"></div>
     </div>
 
     <script>
         function selectPackage(packageId) {
-            document.getElementById('package-select').value = packageId;
             // Add a highlight effect to the booking form
             const bookingSection = document.getElementById('booking-section');
             bookingSection.style.transition = 'background-color 0.5s ease';

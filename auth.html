@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In / Sign Up - VA Auto Detailing</title>
+    <link rel="icon" type="image/x-icon" href="Screen Shot 2025-03-28 at 5.20.36 PM.png">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --black: #000000;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--black);
+            color: white;
+        }
+
+        .header {
+            background-color: var(--black);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .nav {
+            background-color: var(--gold);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .nav a {
+            color: var(--black);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        .auth-container {
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            background-color: var(--black);
+            color: var(--gold);
+            cursor: pointer;
+            border: 1px solid var(--gold);
+        }
+
+        .auth-tab.active {
+            background-color: var(--gold);
+            color: var(--black);
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--gold);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid var(--gold);
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #ffd700;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--gold);
+            color: var(--black);
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .forgot-password a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #ff4444;
+            margin-top: 5px;
+            font-size: 14px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>VA Auto Detailing</h1>
+        <p>Premium Car Care Services</p>
+    </div>
+
+    <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="gallery.html">Our Work</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="auth-container">
+        <div class="auth-tabs">
+            <div class="auth-tab active" onclick="switchTab('signin')">Sign In</div>
+            <div class="auth-tab" onclick="switchTab('signup')">Sign Up</div>
+        </div>
+
+        <form id="signin-form" class="auth-form active" onsubmit="handleSignIn(event)">
+            <div class="form-group">
+                <label for="signin-email">Email</label>
+                <input type="email" id="signin-email" required>
+                <div class="error-message" id="signin-email-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="signin-password">Password</label>
+                <input type="password" id="signin-password" required>
+                <div class="error-message" id="signin-password-error"></div>
+            </div>
+            <button type="submit" class="submit-btn">Sign In</button>
+            <div class="forgot-password">
+                <a href="#" onclick="handleForgotPassword(event)">Forgot Password?</a>
+            </div>
+        </form>
+
+        <form id="signup-form" class="auth-form" onsubmit="handleSignUp(event)">
+            <div class="form-group">
+                <label for="signup-name">Full Name</label>
+                <input type="text" id="signup-name" required>
+                <div class="error-message" id="signup-name-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="signup-email">Email</label>
+                <input type="email" id="signup-email" required>
+                <div class="error-message" id="signup-email-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-password" required>
+                <div class="error-message" id="signup-password-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="signup-confirm-password">Confirm Password</label>
+                <input type="password" id="signup-confirm-password" required>
+                <div class="error-message" id="signup-confirm-password-error"></div>
+            </div>
+            <button type="submit" class="submit-btn">Sign Up</button>
+        </form>
+    </div>
+
+    <script>
+        function switchTab(tab) {
+            // Update active tab
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector(`.auth-tab[onclick="switchTab('${tab}')"]`).classList.add('active');
+
+            // Update active form
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            document.getElementById(`${tab}-form`).classList.add('active');
+        }
+
+        function handleSignIn(event) {
+            event.preventDefault();
+            const email = document.getElementById('signin-email').value;
+            const password = document.getElementById('signin-password').value;
+
+            // Here you would typically make an API call to your backend
+            console.log('Sign in attempt:', { email, password });
+            alert('Sign in functionality would be implemented with backend integration');
+        }
+
+        function handleSignUp(event) {
+            event.preventDefault();
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm-password').value;
+
+            // Basic validation
+            if (password !== confirmPassword) {
+                document.getElementById('signup-confirm-password-error').textContent = 'Passwords do not match';
+                document.getElementById('signup-confirm-password-error').style.display = 'block';
+                return;
+            }
+
+            // Here you would typically make an API call to your backend
+            console.log('Sign up attempt:', { name, email, password });
+            alert('Sign up functionality would be implemented with backend integration');
+        }
+
+        function handleForgotPassword(event) {
+            event.preventDefault();
+            const email = prompt('Please enter your email address:');
+            if (email) {
+                // Here you would typically make an API call to your backend
+                console.log('Password reset requested for:', email);
+                alert('Password reset instructions would be sent to your email');
+            }
+        }
+    </script>
+</body>
+</html> 
